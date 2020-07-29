@@ -1,0 +1,28 @@
+---
+logger:
+  dir: "logs/flybook-sender"
+  level: "DEBUG"
+  keepHours: 24
+
+redis:
+  addr: "127.0.0.1:6379"
+  pass: ""
+  db: 0
+  idle: 5
+  timeout:
+    conn: 500
+    read: 3000
+    write: 3000
+
+# 这个配置不用动，worker是调用flybook的并发数
+consumer:
+  queue: "/n9e/sender/flybook"
+  worker: 10
+
+# flybook 仅支持发送飞书群告警 建议不配置， 通过web端设置
+flybook:
+  appid: "xxxxx"
+  appsecret: "xxxxx"
+  chatid: "xxxx"
+  mobiles:
+    - 110
