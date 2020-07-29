@@ -178,13 +178,13 @@ func (c Client) GetChatid() string {
 
 // Send 发送信息
 func (c *Client) Send(chatid string, mobile []string, msg string) error {
-
+	c.Chatid = chatid
 	postData := c.generateData(mobile, msg)
 	if c.GetChatid() != "" {
 		// 配置了token 说明采用配置文件的token
 		chatid = c.GetChatid()
 	}
-	c.Chatid = chatid
+
 	resultByte, err := jsonPost(c.openUrl, postData, c.Token)
 	if err != nil {
 		return fmt.Errorf("invoke send api fail: %v", err)
