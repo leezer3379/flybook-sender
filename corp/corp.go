@@ -59,7 +59,13 @@ type User struct {
 }
 
 type Result struct {
-	Err
+	Code int     `json:"code"`
+	Msg  string  `json:"msg"`
+	Data Message `json:"data"`
+}
+
+type Message struct {
+	MessageId string `json:"message_id"`
 }
 
 func GetToken(appid,appsecret string) (string, error) {
@@ -178,7 +184,7 @@ func (c *Client) Send(chatid string, mobile []string, msg string) error {
 		// 配置了token 说明采用配置文件的token
 		chatid = c.GetChatid()
 	}
-
+	c.Chatid = chatid
 	resultByte, err := jsonPost(c.openUrl, postData, c.Token)
 	if err != nil {
 		return fmt.Errorf("invoke send api fail: %v", err)
@@ -190,8 +196,8 @@ func (c *Client) Send(chatid string, mobile []string, msg string) error {
 		return fmt.Errorf("parse send api response fail: %v", err)
 	}
 
-	if result.ErrCode != 0 || result.ErrMsg != "ok" {
-		err = fmt.Errorf("invoke send api return ErrCode = %d, ErrMsg = %s ", result.ErrCode, result.ErrMsg)
+	if result.Code != 0 || result.Msg != "ok" {
+		err = fmt.Errorf("200 invoke send api return ErrCode = %d, ErrMsg = %s ", result.Code, result.Msg)
 	}
 
 	return err
