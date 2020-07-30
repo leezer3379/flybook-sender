@@ -33,11 +33,6 @@ func Test(args []string) {
 
 	flyBookClient := corp.New(c.FlyBook.Chatid, c.FlyBook.Mobiles,c.FlyBook.IsAtAll, c.FlyBook.Appid, c.FlyBook.Appsecret)
 
-	if len(args) == 0 {
-		fmt.Println("token not given")
-		os.Exit(1)
-	}
-
 	for i := 0; i < len(args); i++ {
 		mobile = args
 		err := flyBookClient.Send(c.FlyBook.Chatid, mobile, fmt.Sprintf("test message from n9e at %v", time.Now()))
