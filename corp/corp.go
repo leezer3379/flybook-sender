@@ -221,7 +221,8 @@ func jsonPost(url string, data interface{}, token string) ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-
+	fmt.Println(token)
+	fmt.Println(string(jsonBody))
 	req, err := http.NewRequest("POST", url, strings.NewReader(string(jsonBody)))
 	if err != nil {
 		logger.Info("ding talk new post request err =>", err)
