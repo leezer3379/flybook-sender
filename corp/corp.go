@@ -171,6 +171,8 @@ func New(chatid string, mobiles []string, isAtAll bool, appid,appsecret string) 
 	c.Chatid = chatid
 	c.Mobiles = mobiles
 	c.IsAtAll = isAtAll
+	c.Appid = appid
+	c.Appsecret = appsecret
 	c.Token = token
 	return c
 }
