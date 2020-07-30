@@ -19,6 +19,7 @@ import (
 var (
 	semaphore  chan int
 	flybookClient *corp.Client
+
 )
 
 

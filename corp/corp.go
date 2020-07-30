@@ -163,6 +163,7 @@ func (c Client) GetOpneIdFromMobiles(phones []string) (map[string][]User, error)
 // New
 func New(chatid string, mobiles []string, isAtAll bool, token string) *Client {
 	c := new(Client)
+
 	c.openUrl = "https://open.feishu.cn/open-apis/message/v4/send/"
 	c.Chatid = chatid
 	c.Mobiles = mobiles
@@ -185,6 +186,7 @@ func (c *Client) Send(chatid string, mobile []string, msg string) error {
 		chatid = c.GetChatid()
 	}
 
+
 	resultByte, err := jsonPost(c.openUrl, postData, c.Token)
 	if err != nil {
 		return fmt.Errorf("invoke send api fail: %v", err)
@@ -198,6 +200,12 @@ func (c *Client) Send(chatid string, mobile []string, msg string) error {
 
 	if result.Code != 0 || result.Msg != "ok" {
 		err = fmt.Errorf("200 invoke send api return ErrCode = %d, ErrMsg = %s ", result.Code, result.Msg)
+		token, err := GetToken(c.Appid, c.Appsecret)
+		if err != nil {
+			fmt.Println(err)
+		}
+		c.Token = token
+
 	}
 
 	return err
