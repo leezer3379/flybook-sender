@@ -5,7 +5,6 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"github.com/leezer3379/flybook-sender/config"
 	"github.com/toolkits/pkg/logger"
 	"io/ioutil"
 	"net"
@@ -162,9 +161,12 @@ func (c Client) GetOpneIdFromMobiles(phones []string) (map[string][]User, error)
 }
 
 // New
-func New(chatid string, mobiles []string, isAtAll bool, token string) *Client {
+func New(chatid string, mobiles []string, isAtAll bool, appid,appsecret string) *Client {
 	c := new(Client)
-
+	token, err := GetToken(appid,appsecret)
+	if err != nil {
+		fmt.Println(err)
+	}
 	c.openUrl = "https://open.feishu.cn/open-apis/message/v4/send/"
 	c.Chatid = chatid
 	c.Mobiles = mobiles
@@ -201,12 +203,10 @@ func (c *Client) Send(chatid string, mobile []string, msg string) error {
 
 	if result.Code != 0 || result.Msg != "ok" {
 		err = fmt.Errorf("200 invoke send api return ErrCode = %d, ErrMsg = %s ", result.Code, result.Msg)
-		c2 := config.Get()
-		token, err := GetToken(c2.FlyBook.Appid, c2.FlyBook.Appsecret)
+		token, err := GetToken(c.Appid, c.Appsecret)
 		if err != nil {
 			fmt.Println(err)
 		}
-
 		c.Token = token
 
 	}

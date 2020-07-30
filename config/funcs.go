@@ -28,13 +28,10 @@ func InitLogger() {
 
 func Test(args []string) {
 	c := Get()
-	token, err := corp.GetToken(c.FlyBook.Appid, c.FlyBook.Appsecret)
-	if err != nil {
-		fmt.Println(err)
-	}
+
 	var mobile []string
 
-	flyBookClient := corp.New(c.FlyBook.Chatid, c.FlyBook.Mobiles,c.FlyBook.IsAtAll, token)
+	flyBookClient := corp.New(c.FlyBook.Chatid, c.FlyBook.Mobiles,c.FlyBook.IsAtAll, c.FlyBook.Appid, c.FlyBook.Appsecret)
 
 	if len(args) == 0 {
 		fmt.Println("token not given")

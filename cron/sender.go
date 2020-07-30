@@ -25,13 +25,10 @@ var (
 
 func SendFlyBook() {
 	c := config.Get()
-	token, err := corp.GetToken(c.FlyBook.Appid, c.FlyBook.Appsecret)
-	if err != nil {
-		fmt.Println(err)
-	}
+
 	semaphore = make(chan int, c.Consumer.Worker)
 
-	flybookClient = corp.New(c.FlyBook.Chatid, c.FlyBook.Mobiles, c.FlyBook.IsAtAll, token)
+	flybookClient = corp.New(c.FlyBook.Chatid, c.FlyBook.Mobiles, c.FlyBook.IsAtAll, c.FlyBook.Appid, c.FlyBook.Appsecret)
 
 	for {
 		messages := redisc.Pop(1, c.Consumer.Queue)
