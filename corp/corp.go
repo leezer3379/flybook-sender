@@ -5,6 +5,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"github.com/leezer3379/flybook-sender/config"
 	"github.com/toolkits/pkg/logger"
 	"io/ioutil"
 	"net"
@@ -200,10 +201,12 @@ func (c *Client) Send(chatid string, mobile []string, msg string) error {
 
 	if result.Code != 0 || result.Msg != "ok" {
 		err = fmt.Errorf("200 invoke send api return ErrCode = %d, ErrMsg = %s ", result.Code, result.Msg)
-		token, err := GetToken(c.Appid, c.Appsecret)
+		c2 := config.Get()
+		token, err := GetToken(c2.FlyBook.Appid, c2.FlyBook.Appsecret)
 		if err != nil {
 			fmt.Println(err)
 		}
+
 		c.Token = token
 
 	}
