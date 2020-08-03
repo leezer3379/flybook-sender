@@ -61,9 +61,11 @@ func sendBook(message *dataobj.Message) {
 
 	if count := len(message.Tos); count > 0 {
 		for _, tk := range message.Tos {
-			err := flybookClient.Send(tk, mobile, content)
-			if err != nil {
-				logger.Errorf("send to %s fail:  %v", message.Tos, err)
+			if tk != "" {
+				err := flybookClient.Send(tk, mobile, content)
+				if err != nil {
+					logger.Errorf("send to %s fail:  %v", message.Tos, err)
+				}
 			}
 		}
 	} else if flybookClient.GetChatid() != "" {
