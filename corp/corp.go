@@ -140,6 +140,7 @@ func (c Client) GetOpneIdFromMobiles(phones []string) (map[string][]User, error)
 	if err != nil {
 		logger.Error("ding talk post request err =>", err)
 		fmt.Println(err)
+		return nil,err
 	}
 
 	defer resp.Body.Close()
