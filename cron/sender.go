@@ -129,6 +129,16 @@ func genContent(message *dataobj.Message) string {
 		logger.Errorf("InternalServerError: %v", err)
 		return fmt.Sprintf("InternalServerError: %v", err)
 	}
-	esc.PutData(message)
+	if err := esc.PutData(message); err !=nil {
+		for i:=1; i<6; i++ {
+			time.Sleep(30000 * time.Millisecond)
+			esc.InitEs()
+			if err := esc.PutData(message); err == nil {
+				break
+			}
+		}
+
+
+	}
 	return body.String()
 }
