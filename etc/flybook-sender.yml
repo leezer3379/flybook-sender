@@ -14,6 +14,11 @@ redis:
     read: 3000
     write: 3000
 
+
+es:
+  addr: "127.0.0.1:9200"
+  index: "n9ealert"
+
 # 这个配置不用动，worker是调用flybook的并发数
 consumer:
   queue: "/n9e/sender/flybook"

@@ -3,6 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
+	"github.com/leezer3379/flybook-sender/esc"
 	"os"
 	"os/signal"
 	"path"
@@ -58,6 +59,7 @@ func main() {
 
 	config.InitLogger()
 	redisc.InitRedis()
+	esc.InitEs()
 
 	go cron.SendFlyBook()
 
@@ -76,6 +78,7 @@ func ending() {
 
 	logger.Close()
 	redisc.CloseRedis()
+	esc.CloseEs()
 	fmt.Println("sender stopped successfully")
 }
 

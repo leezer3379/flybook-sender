@@ -6,5 +6,6 @@ require (
 	github.com/garyburd/redigo v1.6.0
 	github.com/toolkits/pkg v1.1.1
 	go.uber.org/automaxprocs v1.3.0 // indirect
+	gopkg.in/olivere/elastic.v5 v5.0.86
 	gopkg.in/yaml.v2 v2.3.0 // indirect
 )

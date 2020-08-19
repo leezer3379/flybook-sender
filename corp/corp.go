@@ -282,7 +282,6 @@ func (c *Client) generateData(mobile []string, msg string) interface{} {
 
 			}
 		}
-
 	}
 
 	sendContext["text"] = msg

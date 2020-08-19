@@ -11,6 +11,7 @@ type Config struct {
 	FlyBook  flyBook         `yaml:"flybook"`
 	Consumer consumerSection `yaml:"consumer"`
 	Redis    redisSection    `yaml:"redis"`
+	Es       esSection       `yaml:"es"`
 }
 
 type loggerSection struct {
@@ -25,6 +26,11 @@ type redisSection struct {
 	DB      int            `yaml:"db"`
 	Idle    int            `yaml:"idle"`
 	Timeout timeoutSection `yaml:"timeout"`
+}
+
+type esSection struct {
+	Addr  string `yaml:"addr"`
+	Index string `yaml:"index"`
 }
 
 type timeoutSection struct {

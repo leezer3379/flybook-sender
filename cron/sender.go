@@ -3,6 +3,7 @@ package cron
 import (
 	"bytes"
 	"fmt"
+	"github.com/leezer3379/flybook-sender/esc"
 	"github.com/toolkits/pkg/runner"
 	"path"
 	"strings"
@@ -128,6 +129,6 @@ func genContent(message *dataobj.Message) string {
 		logger.Errorf("InternalServerError: %v", err)
 		return fmt.Sprintf("InternalServerError: %v", err)
 	}
-
+	esc.PutData(message)
 	return body.String()
 }
