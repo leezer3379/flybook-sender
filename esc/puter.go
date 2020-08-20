@@ -19,12 +19,12 @@ func parseEtime(etime int64) string {
 }
 
 func parseUsers(recvUsers []*dataobj.RecvUser) string {
-	var users string
-	users = ""
+	var users []string
+
 	for _,user := range recvUsers {
-		users += user.Username
+		users = append(users, user.Username)
 	}
-	return users
+	return strings.Join(users, ",")
 }
 func PutData(message *dataobj.Message) error {
 	var data = make(map[string]interface{})
