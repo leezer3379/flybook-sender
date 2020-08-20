@@ -56,58 +56,18 @@ func IsExists(index string) {
 		},
 		"n9ealert": {
 			"properties": {
-				"Status": {
-					"type":"text",
-					"store": true,
-					"fielddata": true
-				},
-				"Sname": {
-					"type":"text",
-					"store": true,
-					"fielddata": true
-				},
-				"Endpoint": {
-					"type":"text",
-					"store": true,
-					"fielddata": true
-				},
-				"Metric": {
-					"type":"text",
-					"store": true,
-					"fielddata": true
-				},
-				"Tags": {
-					"type":"text",
-					"store": true,
-					"fielddata": true
-				},
-				"Value": {
-					"type":"text",
-					"store": true,
-					"fielddata": true
-				},
-				"Info": {
-					"type":"text",
-					"store": true,
-					"fielddata": true
-				},
-				"Etime": {
-					"type":"text",
-					"store": true,
-					"fielddata": true
-				},
-				"Elink": {
-					"type":"text",
-					"store": true,
-					"fielddata": true
-				},
-				"Priority": {
-					"type":"text",
-					"store": true,
-					"fielddata": true
-				},
+				"Status": {"type": "keyword"},
+				"Sname": {"type": "keyword"},
+				"Endpoint": {"type": "keyword"},
+				"Metric": {"type": "keyword"},
+				"Tags": {"type": "keyword"},
+				"Value": {"type": "keyword"},
+				"Info": {"type": "keyword"},
+				"Etime": {"type": "keyword"},
+				"Elink": {"type": "keyword"},
+				"Priority": {"type": "keyword"},
+				"Users": {"type": "keyword"},
 				"@timestamp": {"type": "date"}
-				
 			
 			}
 		}

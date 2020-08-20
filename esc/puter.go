@@ -17,6 +17,15 @@ func parseEtime(etime int64) string {
 	t := time.Unix(etime, 0)
 	return t.Format("2006-01-02 15:04:05")
 }
+
+func parseUsers(recvUsers []*dataobj.RecvUser) string {
+	var users string
+	users = ""
+	for _,user := range recvUsers {
+		users += user.Username
+	}
+	return users
+}
 func PutData(message *dataobj.Message) error {
 	var data = make(map[string]interface{})
 	data["Status"] = ET[message.Event.EventType]
@@ -29,6 +38,7 @@ func PutData(message *dataobj.Message) error {
 	data["Etime"] = parseEtime(message.Event.Etime)
 	data["Elink"] = message.EventLink
 	data["Priority"] = message.Event.Priority
+	data["Users"] = parseUsers(message.Event.RecvUser)
 	data["@timestamp"] = time.Now()
 	put1, err := client.Index().
 		Index(cfg.Es.Index).
